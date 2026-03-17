@@ -1,0 +1,43 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { jwtVerify } from 'jose'
+
+const SECRET = new TextEncoder().encode(
+  process.env.NEXTAUTH_SECRET || 'neo-flash-glow-secret-key-change-in-production'
+)
+
+const protectedRoutes = ['/dashboard', '/admin', '/profile', '/timeline', '/airdrop']
+const authRoutes = ['/login', '/signup']
+
+async function getUser(token: string) {
+  try {
+    const { payload } = await jwtVerify(token, SECRET)
+    return payload as { id: string; email: string; role: string; name: string }
+  } catch {
+    return null
+  }
+}
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+  const token = request.cookies.get('auth-token')?.value
+  const user = token ? await getUser(token) : null
+
+  if (protectedRoutes.some(r => pathname.startsWith(r))) {
+    if (!user) {
+      return NextResponse.redirect(new URL('/login', request.url))
+    }
+    if (pathname.startsWith('/admin') && user.role !== 'admin') {
+      return NextResponse.redirect(new URL('/dashboard', request.url))
+    }
+  }
+
+  if (authRoutes.includes(pathname) && user) {
+    return NextResponse.redirect(new URL('/dashboard', request.url))
+  }
+
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+}
