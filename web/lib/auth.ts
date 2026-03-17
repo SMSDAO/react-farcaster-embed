@@ -14,7 +14,7 @@ export interface User {
   avatar?: string
 }
 
-// In-memory user store (replace with database in production)
+// In-memory user store — DEMO ONLY. Replace with a database in production.
 export const users: User[] = [
   {
     id: '1',
@@ -25,6 +25,8 @@ export const users: User[] = [
   },
 ]
 
+// DEMO ONLY: passwords stored in plain text for simplicity.
+// In production, use bcrypt/argon2 to hash and compare passwords.
 export const passwords: Record<string, string> = {
   'admin@admin.com': 'admin123',
 }
