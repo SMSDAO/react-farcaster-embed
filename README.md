@@ -1,181 +1,407 @@
-![react-farcaster-embed](https://wojtek.im/farcaster/react-farcaster-embed-v2.png)
+# ✦ Neo Flash Glow — Farcaster Production App
 
-# react-farcaster-embed
+> **Full-stack, production-ready Farcaster application** built on Next.js 14 (App Router), featuring a "Neo Flash Glow" neon UI, Web3 wallet integration via RainbowKit + wagmi, role-based access control, Farcaster profile/timeline sync, Airdrop Checker, and one-click Vercel deployment.
 
-Display an embedded cast from Farcaster in your React app. Works with Next.js SSR.
+This repository contains two packages:
 
-## Examples
+| Package | Purpose |
+|---|---|
+| **Root** (`react-farcaster-embed`) | React component library — embed Farcaster casts in any React/Next.js app |
+| **`web/`** | Full production Next.js 14 web application |
 
-[Live Demo](https://wojtek.im/journal/react-farcaster-embed-casts-in-your-react-app)
+---
 
-<details>
-  <summary>Regular casts</summary>
-  <img src="https://github.com/pugson/react-farcaster-embed/assets/6843656/9c8d658e-91a1-49ed-9b4b-d59497052823" />
-</details>
+## 📸 Screenshots
 
-<details>
-  <summary>Quoted casts</summary>
-  <img src="https://github.com/pugson/react-farcaster-embed/assets/6843656/50bb8f9d-6041-4c98-a854-8d73df2e82d2" />
-</details>
-
-<details>
-  <summary>With images</summary>
-  <img src="https://github.com/pugson/react-farcaster-embed/assets/6843656/7ba61dc8-6b46-4721-a686-31f8d5c2cfda" />
-</details>
-
-<details>
-  <summary>With video</summary>
-  <img src="https://github.com/pugson/react-farcaster-embed/assets/6843656/fc58fc4e-8c86-400c-81dc-89fe9a050092" />
-</details>
-
-<details>
-  <summary>With link previews</summary>
-  <img src="https://github.com/pugson/react-farcaster-embed/assets/6843656/a61783de-eb68-481c-b215-c1933d3d6925" />
-</details>
-
-## Features
-
-- [x] Supports server components and client components
-- [x] Shows the cast's author, their avatar and username, date when the cast was posted
-- [x] Renders the cast's content with links
-- [x] Shows the channel name and avatar
-- [x] Shows counts for replies, likes, recasts + quotes, watches
-- [x] Adds a link to the cast on Warpcast
-- [x] Renders images inline
-- [x] Renders videos inline
-- [x] Renders rich embeds for links
-- [x] Renders quoted casts with images and videos
-- [ ] Renders a frame preview with buttons
-
-## Installation
-
-```shell
-npm i react-farcaster-embed
-# or
-yarn add react-farcaster-embed
-# or
-pnpm add react-farcaster-embed
+### Landing Page
+```
+╔══════════════════════════════════════════════════════════════╗
+║  ✦ Neo Flash Glow                        [Login] [Get Started]║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║    ✦ Production-Ready Farcaster Platform                     ║
+║                                                              ║
+║        The Future of                                         ║
+║    ╔══════════════════════╗                                   ║
+║    ║  Farcaster Apps  🌈  ║  ← animated gradient neon text   ║
+║    ╚══════════════════════╝                                   ║
+║                                                              ║
+║         [🚀 Launch App]   [Sign In]                          ║
+║                                                              ║
+║  ┌────────────┐ ┌────────────┐ ┌────────────┐               ║
+║  │📡 Timeline │ │💼 Wallet   │ │🪂 Airdrop  │               ║
+║  │View casts  │ │RainbowKit  │ │Multi-chain │               ║
+║  └────────────┘ └────────────┘ └────────────┘               ║
+║  ┌────────────┐ ┌────────────┐ ┌────────────┐               ║
+║  │👤 Profile  │ │⚡ Automate │ │🔐 RBAC     │               ║
+║  │Sync Fcast  │ │1-click sync│ │Admin/Dev   │               ║
+║  └────────────┘ └────────────┘ └────────────┘               ║
+╚══════════════════════════════════════════════════════════════╝
 ```
 
-## Usage
+### Login Page
+```
+╔═══════════════════════════════╗
+║           ✦                   ║
+║       Welcome Back            ║
+║    Sign in to Neo Flash Glow  ║
+║                               ║
+║  ┌─ Demo Admin Credentials ─┐ ║
+║  │ admin@admin.com           │ ║
+║  │ admin123                  │ ║
+║  └───────────────────────────┘ ║
+║                               ║
+║  Email: [_________________]   ║
+║  Pass:  [_________________]   ║
+║                               ║
+║  [        Sign In           ] ║
+║                               ║
+║  No account? Create one →    ║
+╚═══════════════════════════════╝
+```
 
-### React Server Components / Next.js App Router
+### Dashboard (Admin view)
+```
+╔══════════════════════════════════════════════════════╗
+║  ✦  Dashboard  Timeline  Airdrop  Admin  [Wallet]   ║
+╠══════════════════════════════════════════════════════╣
+║  ┌────────────────────────────────────────────────┐  ║
+║  │  A  Admin · admin@admin.com · 👑 Admin         │  ║
+║  │     [Connect Wallet ▼]                         │  ║
+║  └────────────────────────────────────────────────┘  ║
+║                                                      ║
+║  ┌───────┐  ┌───────┐  ┌───────┐  ┌───────┐        ║
+║  │  142  │  │   8   │  │  24   │  │  17   │        ║
+║  │ Casts │  │Synced │  │Checks │  │Recasts│        ║
+║  └───────┘  └───────┘  └───────┘  └───────┘        ║
+║                                                      ║
+║  ⚠️ Admin Notice — change default password!         ║
+╚══════════════════════════════════════════════════════╝
+```
 
-Add these imports inside your server component:
+### Admin Panel
+```
+╔══════════════════════════════════════════════════════╗
+║  ⚙️ Admin Panel                                     ║
+╠══════════════════════════════════════════════════════╣
+║  [👥 Users] [⚙️ Settings] [📋 Logs]                ║
+║                                                      ║
+║  User         │ Role      │ Status  │ Actions       ║
+║  ─────────────┼───────────┼─────────┼───────────── ║
+║  Admin        │ 👑 admin  │ ● active│ [Edit]       ║
+║  Alice Dev    │ 💻 dev    │ ● active│ [Edit][Del]  ║
+║  Bob User     │ 👤 user   │ ● active│ [Edit][Del]  ║
+║  Charlie      │ 👤 user   │ ● susp. │ [Edit][Del]  ║
+╚══════════════════════════════════════════════════════╝
+```
+
+### Airdrop Checker
+```
+╔══════════════════════════════════════════════════════╗
+║  🪂 Airdrop Checker                                  ║
+╠══════════════════════════════════════════════════════╣
+║  ✓ Connected: 0x1234...abcd                          ║
+║                                                      ║
+║  [0x1234...abcd________________] [  Check  ]         ║
+║                                                      ║
+║  ┌──────────────────────────────────────────────┐   ║
+║  │ 🟣 DEGEN Token · Base     ✓ Eligible 1000    │   ║
+║  │ 🔵 ARB Token  · Arbitrum  ✓ Eligible  500    │   ║
+║  │ 🔴 OP Token   · Optimism  ✗ Not Eligible     │   ║
+║  │ 🦄 UNI Token  · Ethereum  ✗ Not Eligible     │   ║
+║  └──────────────────────────────────────────────┘   ║
+╚══════════════════════════════════════════════════════╝
+```
+
+---
+
+## ✨ Features
+
+### Application
+- [x] **Neo Flash Glow UI** — neon cyan/purple/pink glow effects, animated scanline, grid background
+- [x] **Landing Page** — hero section, feature grid, stats counter
+- [x] **Login Page** — JWT auth, demo credentials display
+- [x] **Signup Page** — registration with User / Developer role selection
+- [x] **Dashboard** — role-aware stats, quick-action cards, wallet status
+- [x] **Route Protection** — Next.js middleware-based auth guard
+
+### Authentication & RBAC
+- [x] JWT tokens via `jose` in httpOnly cookies (7-day TTL)
+- [x] Three roles: **Admin**, **Developer**, **User**
+- [x] Default admin: `admin@admin.com` / `admin123`
+- [x] Middleware blocks protected routes for unauthenticated users
+- [x] Admin-only route (`/admin`) redirects non-admins to dashboard
+
+### Farcaster
+- [x] **Timeline Feed** — cast cards with like/recast/reply UI
+- [x] **Cast Embedding** — embed by username + hash (uses `react-farcaster-embed`)
+- [x] **Profile Sync** — fetch followers, following, cast count for any username
+- [x] **One-Click Automation** — auto-sync, auto-like, auto-recast toggles
+
+### Web3
+- [x] **RainbowKit** wallet modal (MetaMask, Coinbase, WalletConnect, etc.)
+- [x] **wagmi v2 + viem v2** — type-safe multi-chain support
+- [x] **Chains**: Ethereum, Polygon, Optimism, Arbitrum, Base
+- [x] Connected wallet address shown in navbar and profile
+
+### Airdrop Checker
+- [x] Manual address input or auto-fill from connected wallet
+- [x] Eligibility results for DEGEN, ARB, OP, UNI, and more
+- [x] Active airdrops listing with deadlines
+
+### Admin Panel
+- [x] User management table (view, edit roles, suspend/remove)
+- [x] System settings form
+- [x] Activity log viewer
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Styling | Tailwind CSS v3 (custom neon theme) |
+| Auth | JWT (`jose`) + httpOnly cookies |
+| Web3 | RainbowKit 2 + wagmi 2 + viem 2 |
+| State | `@tanstack/react-query` v5 |
+| TypeScript | v5 |
+| Deploy | Vercel |
+| Farcaster embeds | `react-farcaster-embed` (this repo root) |
+
+---
+
+## 🚀 Quick Start
+
+```bash
+git clone https://github.com/SMSDAO/react-farcaster-embed.git
+cd react-farcaster-embed/web
+
+npm install
+cp .env.local.example .env.local   # edit with your secrets
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) and log in with `admin@admin.com` / `admin123`.
+
+### Build for Production
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+## ▲ One-Click Vercel Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/SMSDAO/react-farcaster-embed&root-directory=web)
+
+Set these environment variables in Vercel:
+
+| Variable | Description |
+|---|---|
+| `NEXTAUTH_SECRET` | JWT signing secret (32+ chars) — `openssl rand -base64 32` |
+| `NEXT_PUBLIC_APP_URL` | Your deployment URL (`https://your-app.vercel.app`) |
+| `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID` | From [cloud.walletconnect.com](https://cloud.walletconnect.com) |
+
+---
+
+## 🔐 Authentication & Roles
+
+### Default Credentials
+
+| Role | Email | Password |
+|---|---|---|
+| **Admin** | `admin@admin.com` | `admin123` |
+
+> ⚠️ Change the default password in production. The current user store is in-memory — replace with a real database for production.
+
+### Role Permissions
+
+| Feature | User | Developer | Admin |
+|---|---|---|---|
+| Dashboard / Timeline / Airdrop / Profile | ✅ | ✅ | ✅ |
+| Developer API tools | ❌ | ✅ | ✅ |
+| Admin Panel (user management, settings, logs) | ❌ | ❌ | ✅ |
+
+---
+
+## ⚡ One-Click Automation Sync
+
+From the **Profile** page, enable automation workflows:
+
+| Feature | Description |
+|---|---|
+| **Auto-Sync Timeline** | Pull new casts every 30 minutes |
+| **Auto-Like Similar** | Like casts matching configured keywords |
+| **Auto-Recast Follows** | Recast from followed channels automatically |
+
+Wire these to your Farcaster hub integration (Neynar API recommended) for live operation.
+
+---
+
+## 👨‍💻 Developer Guide
+
+### Project Structure
+
+```
+react-farcaster-embed/
+├── src/                          # Library source
+│   ├── components/               # CastEmbed, icons, images, videos
+│   ├── client/                   # Client-side variant
+│   ├── api.ts / types.ts         # API + TypeScript types
+│   └── styles.css                # Default embed styles
+│
+└── web/                          # Next.js application
+    ├── app/
+    │   ├── (auth)/               # login/, signup/ (no navbar)
+    │   ├── (dashboard)/          # dashboard/, timeline/, airdrop/, profile/, admin/
+    │   ├── api/auth/             # login, logout, me, register routes
+    │   ├── layout.tsx            # Root layout + Providers
+    │   ├── page.tsx              # Landing page
+    │   ├── globals.css           # Neo Flash Glow base CSS
+    │   └── providers.tsx         # wagmi + RainbowKit + AuthProvider
+    ├── components/Navbar.tsx     # Top navbar with wallet button
+    ├── lib/
+    │   ├── auth.ts               # JWT helpers, user store, RBAC
+    │   ├── auth-context.tsx      # React auth context + useAuth hook
+    │   └── wagmi.ts              # wagmi chain config
+    ├── middleware.ts             # Route protection middleware
+    ├── tailwind.config.ts        # Neo glow theme
+    └── vercel.json               # Vercel deployment config
+```
+
+### Adding a New Protected Page
+
+```tsx
+// web/app/(dashboard)/my-page/page.tsx
+'use client'
+import { useAuth } from '@/lib/auth-context'
+
+export default function MyPage() {
+  const { user } = useAuth()
+  return <div>Hello {user?.name}</div>
+}
+```
+
+Add a link in `web/components/Navbar.tsx`.
+
+### Adding a Protected API Route
+
+```ts
+// web/app/api/my-endpoint/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+import { verifyToken } from '@/lib/auth'
+
+export async function GET(req: NextRequest) {
+  const token = req.cookies.get('auth-token')?.value
+  const user = token ? await verifyToken(token) : null
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  return NextResponse.json({ data: 'Hello ' + user.name })
+}
+```
+
+### Connecting a Real Database
+
+```bash
+cd web
+npm install prisma @prisma/client
+npx prisma init --datasource-provider postgresql
+```
+
+Update `web/lib/auth.ts` to use Prisma instead of the in-memory arrays. Hash passwords with `bcrypt` or `argon2`.
+
+### Customizing the Glow Theme
+
+Edit `web/tailwind.config.ts` (`neon` colors + `boxShadow`) and `web/app/globals.css` (`.neo-card`, `.neo-btn-primary`, etc.).
+
+### WalletConnect Setup
+
+1. Create project at [cloud.walletconnect.com](https://cloud.walletconnect.com)
+2. Set `projectId` in `web/lib/wagmi.ts` or use env var `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID`
+
+---
+
+## 👤 User Guide
+
+1. **Register** at `/signup` — choose User or Developer role
+2. **Login** at `/login` (or use admin credentials above)
+3. **Connect Wallet** — click the wallet button in the top navbar
+4. **Timeline** — browse Farcaster casts, embed by username + hash
+5. **Profile** — sync your Farcaster profile data, enable automation
+6. **Airdrop Checker** — enter wallet address or use connected wallet, click Check
+7. **Admin** (admin only) — manage users, view logs, update settings
+
+---
+
+## 🔧 Environment Variables
+
+```env
+# web/.env.local
+
+NEXTAUTH_SECRET=your-secret-min-32-chars
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=YOUR_WC_PROJECT_ID
+```
+
+---
+
+## 📦 Library Usage (react-farcaster-embed)
+
+The root package is a standalone React library for embedding Farcaster casts.
+
+### Install
+
+```bash
+npm i react-farcaster-embed
+```
+
+### Server Components (Next.js App Router)
 
 ```jsx
 import { FarcasterEmbed } from "react-farcaster-embed";
-import "react-farcaster-embed/dist/styles.css"; // include default styles or write your own
+import "react-farcaster-embed/dist/styles.css";
 
-
-// use warpcast url
 <FarcasterEmbed url="https://warpcast.com/pugson/0x4294c797" />
-
-// or username and hash of the cast
 <FarcasterEmbed username="dwr" hash="0x48d47343" />
 ```
 
-### Client Components / Next.js Pages Router
-
-Add the CSS import inside `_app.tsx` if you are using Next.js Pages Router:
-
-```tsx
-import "@/styles/globals.css";
-import "react-farcaster-embed/dist/styles.css";
-import type { AppProps } from "next/app";
-
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
-}
-```
-
-And then use the component in your client component using a special import:
+### Client Components
 
 ```jsx
 import { FarcasterEmbed } from "react-farcaster-embed/dist/client";
-
-// use warpcast url
 <FarcasterEmbed url="https://warpcast.com/pugson/0x4294c797" />
-
-// or username and hash of the cast
-<FarcasterEmbed username="dwr" hash="0x48d47343" />
 ```
 
-## Styling
-
-The embed will inherit your body color by default when you import the default stylesheet.
-
-You can change the color of the component by changing its parent's color or adding custom CSS:
-
-```css
-.farcaster-embed-container {
-  color: purple;
-}
-```
-
-## Custom Endpoint
-
-In case you need to self host the Warpcast Client API proxy, you can [fork this repo](https://github.com/pugson/farcaster-api-proxy) and set the `customEndpoint` option in the `FarcasterEmbed` component.
-
-Easiest way to do this is to make a wrapper component with that option applied. Example:
+### Options
 
 ```jsx
-import { FarcasterEmbed as FCEmbed } from "react-farcaster-embed";
+// Custom API proxy endpoint
+<FarcasterEmbed options={{ customEndpoint: "https://your-proxy.xyz/api/casts" }} url="..." />
 
-export const FarcasterEmbed = (props) => (
-  <FCEmbed
-    {...props}
-    options={{
-      customEndpoint: "https://your-endpoint.xyz/api/casts",
-    }}
-  />
-);
+// Suppress errors for deleted casts
+<FarcasterEmbed options={{ silentError: true }} url="..." />
+
+// Pass your own cast data (e.g. from Neynar)
+<FarcasterEmbed castData={myCastData} />
 ```
 
-Casts will be fetched from your custom proxy instead of the default one using this URL structure. Make sure your proxy supports it.
+---
 
-```jsx
-await fetch(`${options?.customEndpoint}/${username}/${hash}`);
-```
+## 🤝 Contributing
 
-## Feeding your own cast JSON into the component
+1. Fork → branch → make changes
+2. `cd web && npm run build` — must pass
+3. Open a Pull Request
 
-Warpcast's API will not return anything when the cast has been deleted, so this is useful if you want to display deleted casts from archival data using your own indexer. Use the `castData` prop to pass in the cast's JSON into the component to render.
+---
 
-```jsx
-const data = { /* cast data coming from your own indexer or Neynar */ };
+## 📄 License
 
-<FarcasterEmbed castData={data} />
-```
+- **react-farcaster-embed** library — [The Unlicense](LICENSE.md)
+- **web/ application** — MIT
 
-## Prevent errors for deleted casts
+---
 
-You can use the `silentError` option to prevent errors from being thrown when the cast is deleted or unable to be fetched.
-
-Easiest way to do this is to make a wrapper component with that option applied. Example:
-
-```jsx
-import { FarcasterEmbed as FCEmbed } from "react-farcaster-embed";
-
-export const FarcasterEmbed = (props) => (
-  <FCEmbed
-    {...props}
-    options={{
-      silentError: true,
-    }}
-  />
-);
-```
-
-## Found it useful?
-
-Follow me on [Farcaster](https://farcaster.com/pugson) or [Twitter](https://twitter.com/pugson).
-
-Send me a tip in ETH or $DEGEN to
-
-- `pugson.eth`
-- `0x96a77560146501eAEB5e6D5B7d8DD1eD23DEfa23`
-
-### Other projects
-
-You might also like [ENS Data](https://ensdata.net) for getting ENS records and avatars or [ABI Data](https://abidata.net) for grabbing smart contract ABIs remotely.
+*Built with ❤️ by [SMSDAO](https://github.com/SMSDAO) · Powered by Next.js, RainbowKit, Farcaster*

@@ -1,9 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { jwtVerify } from 'jose'
 
-const SECRET = new TextEncoder().encode(
-  process.env.NEXTAUTH_SECRET || 'neo-flash-glow-secret-key-change-in-production'
-)
+function getSecret(): Uint8Array {
+  const secret = process.env.NEXTAUTH_SECRET
+  if (!secret) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('NEXTAUTH_SECRET environment variable is required in production')
+    }
+    // Development-only fallback — NOT for production use
+    return new TextEncoder().encode('neo-flash-glow-dev-secret-change-this')
+  }
+  return new TextEncoder().encode(secret)
+}
+
+const SECRET = getSecret()
 
 const protectedRoutes = ['/dashboard', '/admin', '/profile', '/timeline', '/airdrop']
 const authRoutes = ['/login', '/signup']
