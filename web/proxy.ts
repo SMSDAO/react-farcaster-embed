@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { jwtVerify } from 'jose'
 
+/**
+ * Returns the JWT signing secret. Called lazily at request time so that
+ * missing env vars cause a runtime error (not a build-time crash).
+ */
 function getSecret(): Uint8Array {
   const secret = process.env.NEXTAUTH_SECRET
   if (!secret) {
@@ -13,21 +17,19 @@ function getSecret(): Uint8Array {
   return new TextEncoder().encode(secret)
 }
 
-const SECRET = getSecret()
-
 const protectedRoutes = ['/dashboard', '/admin', '/profile', '/timeline', '/airdrop']
 const authRoutes = ['/login', '/signup']
 
 async function getUser(token: string) {
   try {
-    const { payload } = await jwtVerify(token, SECRET)
+    const { payload } = await jwtVerify(token, getSecret())
     return payload as { id: string; email: string; role: string; name: string }
   } catch {
     return null
   }
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
   const token = request.cookies.get('auth-token')?.value
   const user = token ? await getUser(token) : null

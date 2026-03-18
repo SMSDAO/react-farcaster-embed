@@ -1,5 +1,9 @@
 import { SignJWT, jwtVerify } from 'jose'
 
+/**
+ * Returns the JWT signing secret. Called lazily at request time so that
+ * missing env vars cause a runtime error (not a build-time crash).
+ */
 function getSecret(): Uint8Array {
   const secret = process.env.NEXTAUTH_SECRET
   if (!secret) {
@@ -11,8 +15,6 @@ function getSecret(): Uint8Array {
   }
   return new TextEncoder().encode(secret)
 }
-
-const SECRET = getSecret()
 
 export type UserRole = 'admin' | 'user' | 'developer'
 
@@ -45,12 +47,12 @@ export async function createToken(user: User): Promise<string> {
   return new SignJWT({ id: user.id, email: user.email, role: user.role, name: user.name })
     .setProtectedHeader({ alg: 'HS256' })
     .setExpirationTime('7d')
-    .sign(SECRET)
+    .sign(getSecret())
 }
 
 export async function verifyToken(token: string): Promise<User | null> {
   try {
-    const { payload } = await jwtVerify(token, SECRET)
+    const { payload } = await jwtVerify(token, getSecret())
     return payload as unknown as User
   } catch {
     return null
