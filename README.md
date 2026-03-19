@@ -1,13 +1,13 @@
 # ✦ Neo Flash Glow — Farcaster Production App
 
-> **Full-stack, production-ready Farcaster application** built on Next.js 14 (App Router), featuring a "Neo Flash Glow" neon UI, Web3 wallet integration via RainbowKit + wagmi, role-based access control, Farcaster profile/timeline sync, Airdrop Checker, and one-click Vercel deployment.
+> **Full-stack, production-ready Farcaster application** built on Next.js 16 (App Router), featuring a "Neo Flash Glow" neon UI, Web3 wallet integration via RainbowKit + wagmi, role-based access control, Farcaster profile/timeline sync, Airdrop Checker, and one-click Vercel deployment.
 
 This repository contains two packages:
 
 | Package | Purpose |
 |---|---|
 | **Root** (`react-farcaster-embed`) | React component library — embed Farcaster casts in any React/Next.js app |
-| **`web/`** | Full production Next.js 14 web application |
+| **`web/`** | Full production Next.js 16 web application |
 
 ---
 
@@ -160,7 +160,7 @@ This repository contains two packages:
 
 | Layer | Technology |
 |---|---|
-| Framework | Next.js 14 (App Router) |
+| Framework | Next.js 16 (App Router) |
 | Styling | Tailwind CSS v3 (custom neon theme) |
 | Auth | JWT (`jose`) + httpOnly cookies |
 | Web3 | RainbowKit 2 + wagmi 2 + viem 2 |
@@ -267,7 +267,7 @@ react-farcaster-embed/
     │   ├── auth.ts               # JWT helpers, user store, RBAC
     │   ├── auth-context.tsx      # React auth context + useAuth hook
     │   └── wagmi.ts              # wagmi chain config
-    ├── middleware.ts             # Route protection middleware
+    ├── proxy.ts                  # Route protection proxy (Next.js 16)
     ├── tailwind.config.ts        # Neo glow theme
     └── vercel.json               # Vercel deployment config
 ```

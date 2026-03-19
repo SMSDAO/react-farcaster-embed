@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "overrides": {
+    "socket.io-parser": "^4.2.6"
+  },
   "dependencies": {
     "@rainbow-me/rainbowkit": "^2.2.4",
     "@tailwindcss/forms": "^0.5.10",
@@ -19,6 +22,7 @@
     "postcss": "^8.5.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-farcaster-embed": "^1.11.0",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.8.3",
     "viem": "^2.29.2",

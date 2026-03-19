@@ -40,12 +40,14 @@ export default function LoginPage() {
             <p className="text-slate-500 text-sm">Sign in to Neo Flash Glow</p>
           </div>
 
-          {/* Demo Credentials */}
-          <div className="mb-6 p-3 rounded-lg border border-cyan-400/20 bg-cyan-400/5 text-xs text-slate-400">
-            <p className="text-cyan-400 font-medium mb-1">Demo Admin Credentials:</p>
-            <p>Email: <code className="text-white">admin@admin.com</code></p>
-            <p>Password: <code className="text-white">admin123</code></p>
-          </div>
+          {/* Demo credentials — hidden in production builds */}
+          {process.env.NODE_ENV !== 'production' && (
+            <div className="mb-6 p-3 rounded-lg border border-cyan-400/20 bg-cyan-400/5 text-xs text-slate-400">
+              <p className="text-cyan-400 font-medium mb-1">Demo Admin Credentials:</p>
+              <p>Email: <code className="text-white">admin@admin.com</code></p>
+              <p>Password: <code className="text-white">admin123</code></p>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>

@@ -1,5 +1,9 @@
 'use client'
 import { useState } from 'react'
+// The react-farcaster-embed main export uses `import "server-only"` (it is a Server Component).
+// We import from dist/client which is the published client-side build for use in Client Components.
+import { FarcasterEmbed } from 'react-farcaster-embed/dist/client'
+import 'react-farcaster-embed/dist/styles.css'
 
 const DEMO_CASTS = [
   { id: '1', author: 'pugson', displayName: 'Wojtek', pfp: 'https://api.dicebear.com/7.x/shapes/svg?seed=pugson', text: 'react-farcaster-embed just got a major upgrade! Now with Neo Flash Glow UI. Check it out 🚀', likes: 142, recasts: 28, replies: 17, timestamp: '2h ago', hash: '0x4294c797' },
@@ -53,12 +57,9 @@ export default function TimelinePage() {
           </button>
         </form>
         {embedUrl && (
-          <div className="mt-4 p-4 rounded-lg bg-dark-700 border border-cyan-400/20">
-            <p className="text-xs text-slate-500 mb-2">Embedded cast from: <span className="text-cyan-400">{embedUrl}</span></p>
-            <div className="text-center text-slate-400 py-8">
-              <p>🔌 Cast embed would render here using FarcasterEmbed component</p>
-              <p className="text-xs mt-2 text-slate-600">Note: FarcasterEmbed requires server-side rendering. Use in a Server Component.</p>
-            </div>
+          <div className="mt-4">
+            <p className="text-xs text-slate-500 mb-3">Embedded cast from: <span className="text-cyan-400">{embedUrl}</span></p>
+            <FarcasterEmbed url={embedUrl} />
           </div>
         )}
       </div>

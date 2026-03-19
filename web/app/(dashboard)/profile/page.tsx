@@ -50,7 +50,7 @@ export default function ProfilePage() {
         <h2 className="text-lg font-semibold text-white mb-4">Your Account</h2>
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-full flex items-center justify-center text-xl bg-purple-500/20 border border-purple-500/40 text-white font-bold" style={{boxShadow:'0 0 20px rgba(179,0,255,0.3)'}}>
-            {user?.name.charAt(0).toUpperCase()}
+            {user?.name?.charAt(0).toUpperCase()}
           </div>
           <div>
             <p className="text-white font-semibold">{user?.name}</p>
